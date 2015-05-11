@@ -15,7 +15,6 @@ public class DrugstoreTest {
     DrugstoreService service= context.getBean(DrugstoreService.class);
     @org.junit.Test
     public void testaddDrugstroe() {
-
         Drugstore d= new Drugstore();
         d.setName("admin");
         d.setPassword("123456");

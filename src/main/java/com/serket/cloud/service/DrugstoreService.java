@@ -13,13 +13,13 @@ public interface DrugstoreService {
      */
     public void addDrugstore(Drugstore drugstore);
 
+
     /**
-     * 登录
-     * @param name 用户名
-     * @param password 密码
-     * @return accessToken
-     *
+     * 商户登录
+     * @param drugstore 用户登录信息
+      * @param ip 登录的ip
+     * @return 成功返回accessToken,失败返回null
      */
-    public String login(String name,String password);
+    public String login( Drugstore drugstore, String ip);
 
 }

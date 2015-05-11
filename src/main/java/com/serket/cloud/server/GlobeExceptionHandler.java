@@ -20,6 +20,7 @@ public class GlobeExceptionHandler {
         if(e instanceof MissingServletRequestParameterException){
             msg.put("errmsg","  parameters Exception");
         }
+        msg.put("e",e.toString()+"   "+e.getClass());
         return msg;
     }
 

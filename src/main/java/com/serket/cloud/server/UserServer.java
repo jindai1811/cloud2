@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public interface UserServer {
      * @return json 返回状态
      */
     @RequestMapping(value = "/business/login", method = RequestMethod.GET)
-    public Map<String, String> businessLogin(@RequestParam("name") String name, @RequestParam("password") String password, @RequestParam("appid") String appid);
+    public Map<String, String> businessLogin(@RequestParam("name") String name, @RequestParam("password") String password, @RequestParam("appid") String appid,HttpServletRequest request);
 
     /**
      * 推送服务器认证登录

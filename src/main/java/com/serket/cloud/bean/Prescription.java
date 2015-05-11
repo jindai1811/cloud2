@@ -6,12 +6,12 @@ import java.sql.Timestamp;
  * Created by Administrator on 2015/5/10.
  */
 public class Prescription {
-private String    id;//	Stirng	否	使用uuid作为主键
-private String    content;//	Stirng	否	医嘱内容
-private Timestamp createdate;//	Date	否	创建时间
-private String    appid;//Stirng	否	商户id
-private String    qrcode;//	Stirng
-private int     state;//Int		否	商户id否	默认0正常,-1删除,1 失效
+    private String id;//	Stirng	否	使用uuid作为主键
+    private String content;//	Stirng	否	医嘱内容
+    private Timestamp createdate;//	Date	否	创建时间
+    private String appid;//Stirng	否	商户id
+    private String qrcode;//	Stirng
+    private int state;//Int		否	商户id否	默认0正常,-1删除,1 失效
 
 
     public String getContent() {

@@ -4,7 +4,6 @@ import com.serket.cloud.bean.Drugstore;
 import com.serket.cloud.service.DrugstoreService;
 
 
-import org.junit.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,8 +25,8 @@ public class DrugstoreTest {
 
     @org.junit.Test
     public void testLogin(){
-         String sttr=   service.login("admin2", "123456");
-        System.out.println(sttr);
+         //String sttr=   service.login("admin2", "123456", ip);
+      //  System.out.println(sttr);
     }
 
 }

@@ -17,13 +17,13 @@ public class PrescriptionServerImpl implements PrescriptionServer {
     @Autowired
     private PrescriptionService service;
 
-    public Map<String, String> businessLogin(@PathVariable("appid") String appid, @PathVariable("content") String content) {
+    public Map<String, String> businessPrescription(@PathVariable("appid") String appid, @PathVariable("content") String content) {
         String QRCode = service.generateQRCode(appid, content);
         Map<String, String> map = new HashMap<String, String>();
         // ×´Ì¬
         map.put("state", "ok");
         // ¶þÎ¬ÂëÄÚÈÝ
-        map.put("QRCode", QRCode);
+        map.put("QRCode",   service.generateQRCode(appid,content));
         return map;
     }
 

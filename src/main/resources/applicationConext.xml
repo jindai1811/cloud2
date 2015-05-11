@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd   ">
+    <!--<context:property-placeholder location="classpath:mongodb.properties"/>-->
+       <!--&lt;!&ndash; 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 &ndash;&gt;-->
+       <!--<mongo:mongo id="mongo" replica-set="localhost:27017">-->
+              <!--&lt;!&ndash; 一些连接属性的设置 &ndash;&gt;-->
+              <!--<mongo:options-->
+                      <!--connections-per-host="${mongo.connectionsPerHost}"-->
+                      <!--threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"-->
+                      <!--connect-timeout="${mongo.connectTimeout}"-->
+                      <!--max-wait-time="${mongo.maxWaitTime}"-->
+                      <!--auto-connect-retry="${mongo.autoConnectRetry}"-->
+                      <!--socket-keep-alive="${mongo.socketKeepAlive}"-->
+                      <!--socket-timeout="${mongo.socketTimeout}"-->
+                      <!--slave-ok="${mongo.slaveOk}"-->
+                      <!--write-number="1"-->
+                      <!--write-timeout="0"-->
+                      <!--write-fsync="true"/>-->
+       <!--</mongo:mongo>-->
+
+       <!--&lt;!&ndash; mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 &ndash;&gt;-->
+       <!--<mongo:db-factory dbname="test" mongo-ref="mongo"/>-->
+    <!--&lt;!&ndash; mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成 &ndash;&gt;-->
+    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
+        <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
+    <!--</bean>-->
+
+<context:component-scan base-package="com.serket.cloud.service"/>
+
+    <mongo:mongo id="mongo" host="127.0.0.1" port="27017">
+
+        <mongo:options connections-per-host="40"
+                       threads-allowed-to-block-for-connection-multiplier="1500"
+                       connect-timeout="15000"
+                       auto-connect-retry="true"
+                       socket-timeout="10000"
+                       write-number="1"
+                       write-fsync="false"></mongo:options>
+    </mongo:mongo>
+    <mongo:db-factory dbname="users" mongo-ref="mongo" ></mongo:db-factory>
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"
+><constructor-arg name="mongoDbFactory" ref="mongoDbFactory"></constructor-arg>
+
+    </bean></beans>

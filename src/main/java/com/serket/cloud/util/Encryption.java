@@ -15,19 +15,24 @@ import java.util.UUID;
  * Created by Administrator on 2015/5/10.
  */
 public class Encryption {
-    public static String QRCode() {
+    public static String getdownload(){
         String url="http://t.cn/RAkHJel";
         InputStream in= Encryption.class.getClassLoader().getResourceAsStream("download");
         try {
             byte []b= new byte[in.available()];
-            url= new String(b);
+            in.read(b);
+            url= new String(b,"utf-8");
         } catch (IOException e) {
         }
+        return url;
+    }
+    public static String QRCode() {
+
         String uuid = UUID.randomUUID().toString();
         //去掉uuid中的-
         uuid = uuid.replace("-", "");
         // 给uuid 随机添加一些特殊符号
-        return url+"/"+addRandomString(uuid,40);
+        return addRandomString(uuid,40);
     }
     public static  String accessToken(){
         String uuid = UUID.randomUUID().toString();
@@ -38,11 +43,11 @@ public class Encryption {
 
     private static Random r = new Random();
     //用于生成二维码
-    public static char[] cs = {'`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '}', '[', ']', '|', '\'', ':', ';', '"', '<', '>', '.', '?', '/', '"'};
+    private static char[] cs = {'`', '~', '!',   '$',   '^',   '*', '(', ')', '_',   '-', '=', '{', '}', '[', ']', '|', '\'', ':', ';', '"', '<', '>', '.',     '"'};
     private static String addRandomString(String uuid,int lenth) {
         StringBuffer sb= new StringBuffer(uuid);
         for (int i = 0; i < lenth-uuid.length(); i++) {
-            sb.insert(r.nextInt(31),cs[r.nextInt(30)]);
+            sb.insert(r.nextInt(32),cs[r.nextInt(24)]);
         }
         return sb.toString();
     }

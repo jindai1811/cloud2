@@ -15,8 +15,11 @@
     <!--视图解析器,-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" ></bean>
     <mvc:interceptors>
-
+        <mvc:interceptor>
+            <mvc:mapping path="/business/prescription/*/*"/>
+            <bean class="com.serket.cloud.interceptor.AccessTokenInterceptor"></bean>
+        </mvc:interceptor>
         <bean class="com.serket.cloud.interceptor.LogsInterceptor"></bean>
-        <bean class="com.serket.cloud.interceptor.AccessTokenInterceptor"></bean>
+        <!--<bean class="com.serket.cloud.interceptor.AccessTokenInterceptor"></bean>-->
     </mvc:interceptors>
 </beans>

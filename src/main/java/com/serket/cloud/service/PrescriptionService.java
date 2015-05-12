@@ -11,4 +11,11 @@ public interface PrescriptionService {
      * @return 二维码code
      */
     String generateQRCode(String appid, String content);
+
+    /**
+     * 根据二维码获取内容
+     * @param qrCode
+     * @return 内容
+     */
+    String getContent(String qrCode);
 }

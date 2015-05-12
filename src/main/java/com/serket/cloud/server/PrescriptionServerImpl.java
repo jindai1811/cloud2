@@ -4,6 +4,7 @@ import com.serket.cloud.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -23,7 +24,21 @@ public class PrescriptionServerImpl implements PrescriptionServer {
         // ×´Ì¬
         map.put("state", "ok");
         // ¶þÎ¬ÂëÄÚÈÝ
-        map.put("QRCode",   service.generateQRCode(appid,content));
+        map.put("QRCode", service.generateQRCode(appid, content));
+        return map;
+    }
+
+    public Map<String, String> servicePrescription( @RequestParam("qrcode") String qrcode) {
+        System.out.println("qrcode"+qrcode);
+        String content = service.getContent(qrcode);
+        Map<String, String> map = new HashMap<String, String>();
+        if (content == null) {
+            map.put("state", "fail");
+            map.put("errmsg", "non-existent");
+            return map;
+        }
+        map.put("state", "ok");
+        map.put("content", content);
         return map;
     }
 

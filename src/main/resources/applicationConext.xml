@@ -3,10 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:task="http://www.springframework.org/schema/task"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/data/mongo
           http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd   ">
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd  ">
     <!--<context:property-placeholder location="classpath:mongodb.properties"/>-->
        <!--&lt;!&ndash; 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 &ndash;&gt;-->
        <!--<mongo:mongo id="mongo" replica-set="localhost:27017">-->
@@ -32,7 +35,8 @@
         <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
     <!--</bean>-->
 
-<context:component-scan base-package="com.serket.cloud.service"/>
+<context:component-scan base-package="com.serket.cloud"/>
+
 
     <mongo:mongo id="mongo" host="127.0.0.1" port="27017">
 
@@ -48,4 +52,8 @@
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"
 ><constructor-arg name="mongoDbFactory" ref="mongoDbFactory"></constructor-arg>
 
-    </bean></beans>
+    </bean>
+    <!--<!—开启这个配置，spring才能识别@Scheduled注解   &ndash;&gt;-->
+    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
+    <task:scheduler id="qbScheduler" pool-size="10"/>
+</beans>
